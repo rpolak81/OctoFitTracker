@@ -10,7 +10,7 @@ class Team(models.Model):
 class User(models.Model):
     email = models.EmailField(unique=True)
     username = models.CharField(max_length=100)
-    team = models.ForeignKey(Team, on_delete=models.SET_NULL, null=True, related_name='members')
+    team = models.ForeignKey(Team, on_delete=models.SET_NULL, null=True, blank=True, related_name='members')
     class Meta:
         db_table = 'users'
     def __str__(self):
@@ -27,7 +27,6 @@ class Activity(models.Model):
 class Workout(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
-    suggested_for = models.ManyToManyField(User, related_name='suggested_workouts')
     class Meta:
         db_table = 'workouts'
 
